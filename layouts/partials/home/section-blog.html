@@ -66,7 +66,7 @@
   {{ end }}
 
   {{ with $s.moreUrl }}
-    <p class="section-more"><a href="{{ . | relLangURL }}">{{ or $s.moreLabel "Voir tous les articles" }} →</a></p>
+    <p class="section-more"><a href="{{ . | relLangURL }}">{{ or $s.moreLabel (i18n "viewAllPosts" | default "Voir tous les articles") }} →</a></p>
   {{ end }}
 </section>
 {{ end }}

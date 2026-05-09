@@ -55,13 +55,13 @@
           {{ with .email }}
           <a href="{{ . }}" class="profile-social">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
-            Email
+            {{ i18n "email" | default "E-mail" }}
           </a>
           {{ end }}
           {{ with .website }}
           <a href="{{ . }}" class="profile-social" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-            Site web
+            {{ i18n "website" | default "Website" }}
           </a>
           {{ end }}
         </div>
@@ -76,7 +76,7 @@
     {{/* Bio */}}
     {{ with $author.bio }}
     <div class="profile-section">
-      <h2 class="profile-section-title">À propos</h2>
+      <h2 class="profile-section-title">{{ i18n "about" | default "À propos" }}</h2>
       <p class="profile-bio">{{ . }}</p>
     </div>
     {{ end }}
@@ -84,7 +84,7 @@
     {{/* Skills / tags */}}
     {{ with $author.skills }}
     <div class="profile-section">
-      <h2 class="profile-section-title">Compétences</h2>
+      <h2 class="profile-section-title">{{ i18n "skills" | default "Compétences" }}</h2>
       <div class="profile-skills">
         {{ range . }}<span class="profile-skill">{{ . }}</span>{{ end }}
       </div>
@@ -95,7 +95,7 @@
     {{ $recent := first 6 (where (.Site.RegularPages.ByDate.Reverse) "RelPermalink" "ne" $page.RelPermalink) }}
     {{ if $recent }}
     <div class="profile-section">
-      <h2 class="profile-section-title">Dernières publications</h2>
+      <h2 class="profile-section-title">{{ i18n "recentPublications" | default "Dernières publications" }}</h2>
       <div class="profile-publications">
         {{ range $recent }}
         <a href="{{ .RelPermalink }}" class="profile-pub-card">

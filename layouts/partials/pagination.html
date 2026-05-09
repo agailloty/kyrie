@@ -1,8 +1,8 @@
 {{ $p := .Paginator }}
 {{ if gt $p.TotalPages 1 }}
-<nav class="pagination" aria-label="Pagination">
+<nav class="pagination" aria-label="{{ i18n "pagination" | default "Pagination" }}">
   {{ if $p.HasPrev }}
-    <a href="{{ $p.Prev.URL }}" aria-label="Page précédente">&#8592;</a>
+    <a href="{{ $p.Prev.URL }}" aria-label="{{ i18n "prevPage" | default "Page précédente" }}">&#8592;</a>
   {{ else }}
     <span class="page-item disabled" aria-disabled="true">&#8592;</span>
   {{ end }}
@@ -16,7 +16,7 @@
   {{ end }}
 
   {{ if $p.HasNext }}
-    <a href="{{ $p.Next.URL }}" aria-label="Page suivante">&#8594;</a>
+    <a href="{{ $p.Next.URL }}" aria-label="{{ i18n "nextPage" | default "Page suivante" }}">&#8594;</a>
   {{ else }}
     <span class="page-item disabled" aria-disabled="true">&#8594;</span>
   {{ end }}

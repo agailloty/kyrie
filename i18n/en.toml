@@ -30,3 +30,48 @@ other = "Table of contents"
 
 [tags]
 other = "Tags"
+
+[noItems]
+other = "No items."
+
+[about]
+other = "About"
+
+[skills]
+other = "Skills"
+
+[recentPublications]
+other = "Recent publications"
+
+[website]
+other = "Website"
+
+[email]
+other = "E-mail"
+
+[viewAllPosts]
+other = "View all posts"
+
+[viewProject]
+other = "View →"
+
+[viewDetails]
+other = "Details"
+
+[viewProjectLink]
+other = "View project →"
+
+[readMore]
+other = "Read more"
+
+[allProjects]
+other = "All"
+
+[prevPage]
+other = "Previous page"
+
+[nextPage]
+other = "Next page"
+
+[pagination]
+other = "Pagination"

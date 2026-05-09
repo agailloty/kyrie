@@ -15,7 +15,7 @@
 
   {{ if gt (len $allCats) 0 }}
   <div class="filter-bar" data-filter-bar>
-    <button class="filter-btn is-active" data-cat="*">Tous</button>
+    <button class="filter-btn is-active" data-cat="*">{{ i18n "allProjects" | default "Tous" }}</button>
     {{ range $allCats }}
       <button class="filter-btn" data-cat="{{ . | urlize }}">{{ . }}</button>
     {{ end }}
@@ -44,9 +44,9 @@
           {{ end }}
           <div class="showcase-actions">
             {{ with .Params.link }}
-              <a class="btn-outline" href="{{ . }}" target="_blank" rel="noopener noreferrer">Voir →</a>
+              <a class="btn-outline" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ i18n "viewProject" | default "Voir →" }}</a>
             {{ end }}
-            <a class="btn-outline" href="{{ .RelPermalink }}">Détails</a>
+            <a class="btn-outline" href="{{ .RelPermalink }}">{{ i18n "viewDetails" | default "Détails" }}</a>
           </div>
         </div>
       </article>

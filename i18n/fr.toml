@@ -30,3 +30,48 @@ other = "Table des matières"
 
 [tags]
 other = "Tags"
+
+[noItems]
+other = "Aucun élément."
+
+[about]
+other = "À propos"
+
+[skills]
+other = "Compétences"
+
+[recentPublications]
+other = "Dernières publications"
+
+[website]
+other = "Site web"
+
+[email]
+other = "E-mail"
+
+[viewAllPosts]
+other = "Voir tous les articles"
+
+[viewProject]
+other = "Voir →"
+
+[viewDetails]
+other = "Détails"
+
+[viewProjectLink]
+other = "Voir le projet →"
+
+[readMore]
+other = "Lire la suite"
+
+[allProjects]
+other = "Tous"
+
+[prevPage]
+other = "Page précédente"
+
+[nextPage]
+other = "Page suivante"
+
+[pagination]
+other = "Pagination"

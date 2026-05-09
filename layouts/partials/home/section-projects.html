@@ -46,9 +46,9 @@
           {{ end }}
           <div class="showcase-actions">
             {{ with .Params.link }}
-              <a class="btn-outline" href="{{ . }}" target="_blank" rel="noopener noreferrer">Voir →</a>
+              <a class="btn-outline" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ i18n "viewProject" | default "Voir →" }}</a>
             {{ end }}
-            <a class="btn-outline" href="{{ .RelPermalink }}">Détails</a>
+            <a class="btn-outline" href="{{ .RelPermalink }}">{{ i18n "viewDetails" | default "Détails" }}</a>
           </div>
         </div>
       </article>
