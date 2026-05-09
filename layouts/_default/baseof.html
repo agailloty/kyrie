@@ -10,6 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   {{ $style := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+  {{/* Syntax highlighting theme (Chroma) */}}
+  {{ $syntaxTheme := .Site.Params.syntaxTheme | default "github" }}
+  {{ $syntaxCSS := resources.Get (printf "css/syntax/%s.css" $syntaxTheme) }}
+  {{ if $syntaxCSS }}
+    {{ $syntaxCSS = $syntaxCSS | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $syntaxCSS.RelPermalink }}" integrity="{{ $syntaxCSS.Data.Integrity }}">
+  {{ end }}
   {{/* Color scheme and mode initialization */}}
   <script>
     (function() {
