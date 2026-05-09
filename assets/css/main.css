@@ -341,9 +341,9 @@ html.dark .theme-rose {
 .theme-navy.dark,
 .dark .theme-navy,
 html.dark .theme-navy {
-  --bg: #1d242f;
-  --bg-accent: #545c67;
-  --panel: #3a3e48;
+  --bg: #1e2226;
+  --bg-accent: #202123;
+  --panel: #1b1c1f;
   --text: #e6edf3;
   --muted: #8b949e;
   --primary: #326cca;
@@ -953,16 +953,19 @@ code {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  padding: 0.4rem 0.75rem;
-  background: var(--primary);
-  color: #fff;
-  border: none;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-accent);
+  color: var(--muted);
+  border: 1px solid var(--line);
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.75rem;
-  font-weight: 600;
   opacity: 0;
-  transition: opacity 0.2s, background 0.2s;
+  transition: opacity 0.2s, background 0.2s, color 0.2s;
   z-index: 10;
   min-height: auto;
 }
@@ -972,11 +975,15 @@ code {
 }
 
 .copy-code-btn:hover {
-  background: var(--primary-strong);
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
 }
 
 .copy-code-btn.copied {
   background: #10b981;
+  color: #fff;
+  border-color: #10b981;
 }
 
 /* Docs layout: sidebar + content */
