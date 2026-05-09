@@ -12,7 +12,7 @@
       {{ with .Params.tags }}
         <footer class="post-footer">
           <div class="post-tags">
-            <span class="post-tags-label">Tags :</span>
+            <span class="post-tags-label">{{ i18n "tags" }}:</span>
             {{ range . }}<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>{{ end }}
           </div>
         </footer>
@@ -21,9 +21,9 @@
 
     {{ $toc := .TableOfContents }}
     {{ if and $toc (ne $toc "<nav id=\"TableOfContents\"></nav>") }}
-    <aside class="article-toc" aria-label="Table des matières">
+    <aside class="article-toc" aria-label="{{ i18n "tableOfContents" }}">
       <div class="toc-inner">
-        <p class="toc-label">Table des matières</p>
+        <p class="toc-label">{{ i18n "tableOfContents" }}</p>
         {{ $toc }}
       </div>
     </aside>

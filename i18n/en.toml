@@ -24,3 +24,9 @@ other = "Create marketing and company pages"
 
 [documentation]
 other = "Docs navigation"
+
+[tableOfContents]
+other = "Table of contents"
+
+[tags]
+other = "Tags"

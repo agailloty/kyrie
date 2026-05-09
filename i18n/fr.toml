@@ -24,3 +24,9 @@ other = "Creez des pages marketing ou institutionnelles"
 
 [documentation]
 other = "Navigation docs"
+
+[tableOfContents]
+other = "Table des matières"
+
+[tags]
+other = "Tags"
