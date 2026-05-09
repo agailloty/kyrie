@@ -1,0 +1,95 @@
+baseURL = "/"
+title = "My Curious Site"
+theme = "kyrie"
+
+# ─── Multilingual setup ─────────────────────────────────────────────────────
+# Remove or simplify this section for a single-language site.
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+[pagination]
+pagerSize = 10
+
+[markup.goldmark.renderer]
+unsafe = true
+
+# ─── Global parameters ──────────────────────────────────────────────────────
+[params]
+tagline = "A flexible Hugo theme for blogs, docs & portfolios"
+description = "kyrie — clean, bilingual-ready Hugo theme."
+
+# Interface size: "m" (default), "l", or "xl"
+size = "m"
+
+# Color scheme: "teal" (default), "ocean", "forest", "sunset", "lavender", "slate", "rose"
+colorScheme = "teal"
+
+# Color mode: "auto" (follows system), "light", or "dark"
+colorMode = "auto"
+
+# ─── Brand ──────────────────────────────────────────────────────────────────
+[params.brand]
+name    = "Curious"
+logoText = "Curious"
+
+# ─── Home page ──────────────────────────────────────────────────────────────
+[params.home]
+showHero   = true
+heroTitle  = "Welcome to my site"
+heroSubtitle = "Built with Hugo and the kyrie theme"
+
+# Home page sections — order here = display order
+# type: "blog" | "projects" | "custom"
+[[params.home.sections]]
+type    = "blog"
+title   = "Latest posts"
+count   = 3
+layout  = "cards"   # "cards" | "list"
+moreUrl = "/blog/"
+
+[[params.home.sections]]
+type       = "projects"
+title      = "Projects"
+showFilter = true
+allLabel   = "All"
+
+# ─── Blog ───────────────────────────────────────────────────────────────────
+[params.blog]
+showAuthor      = true
+showDate        = true
+showReadingTime = true
+showTags        = true
+# "cards" | "list" — can also be overridden via _index.md front matter
+listLayout = "cards"
+
+# ─── Docs ───────────────────────────────────────────────────────────────────
+[params.docs]
+sidebar          = true
+showBreadcrumbs  = true
+showToc          = true
+
+# ─── Footer ─────────────────────────────────────────────────────────────────
+[params.footer]
+showCopyright = true
+customText    = ""
+
+# ─── Navigation menu ────────────────────────────────────────────────────────
+[[menu.main]]
+name   = "Blog"
+url    = "/blog/"
+weight = 10
+
+[[menu.main]]
+name   = "Docs"
+url    = "/docs/"
+weight = 20
+
+[[menu.main]]
+name   = "Projects"
+url    = "/projects/"
+weight = 15
+
+[[menu.main]]
+name   = "About"
+url    = "/about/"
+weight = 30

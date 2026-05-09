@@ -1,0 +1,78 @@
+{{ $s := .section }}
+{{ $page := .page }}
+{{ $projects := where $page.Site.RegularPages "Section" "projects" }}
+{{ if gt (len $projects) 0 }}
+<section class="home-section">
+  {{ with $s.title }}<h2>{{ . }}</h2>{{ end }}
+
+  {{ if $s.showFilter }}
+    {{/* Collect unique categories across all projects */}}
+    {{ $allCats := slice }}
+    {{ range $projects }}
+      {{ range .Params.categories }}
+        {{ $allCats = $allCats | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $allCats = $allCats | uniq | sort }}
+    {{ if gt (len $allCats) 0 }}
+    <div class="filter-bar" data-filter-bar>
+      <button class="filter-btn is-active" data-cat="*">{{ or $s.allLabel "Tous" }}</button>
+      {{ range $allCats }}
+        <button class="filter-btn" data-cat="{{ . | urlize }}">{{ . }}</button>
+      {{ end }}
+    </div>
+    {{ end }}
+  {{ end }}
+
+  <div class="showcase" data-showcase>
+    {{ range $projects }}
+      {{ $catSlugs := slice }}
+      {{ range .Params.categories }}
+        {{ $catSlugs = $catSlugs | append (. | urlize) }}
+      {{ end }}
+      <article class="showcase-card" data-cats="{{ delimit $catSlugs " " }}">
+        {{ with .Params.image }}
+          <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" class="showcase-img">
+        {{ else }}
+          <div class="showcase-placeholder"></div>
+        {{ end }}
+        <div class="showcase-body">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          {{ with .Description }}<p>{{ . }}</p>{{ end }}
+          {{ with .Params.categories }}
+            <div class="showcase-cats">
+              {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+            </div>
+          {{ end }}
+          <div class="showcase-actions">
+            {{ with .Params.link }}
+              <a class="btn-outline" href="{{ . }}" target="_blank" rel="noopener noreferrer">Voir →</a>
+            {{ end }}
+            <a class="btn-outline" href="{{ .RelPermalink }}">Détails</a>
+          </div>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</section>
+
+<script>
+(function () {
+  document.querySelectorAll('[data-filter-bar]').forEach(function (bar) {
+    var showcase = bar.nextElementSibling;
+    if (!showcase) return;
+    bar.addEventListener('click', function (e) {
+      var btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      bar.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      var cat = btn.dataset.cat;
+      showcase.querySelectorAll('.showcase-card').forEach(function (card) {
+        var cats = card.dataset.cats ? card.dataset.cats.split(' ') : [];
+        card.hidden = cat !== '*' && !cats.includes(cat);
+      });
+    });
+  });
+})();
+</script>
+{{ end }}

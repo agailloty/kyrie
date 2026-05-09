@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <section class="content-shell">
+    {{ if .Site.Params.docs.sidebar }}
+      {{ partial "docs-sidebar.html" . }}
+    {{ end }}
+    <article class="single">
+      {{ if .Site.Params.docs.showBreadcrumbs }}
+        <p class="meta">
+          <a href="{{ "/docs/" | relLangURL }}">{{ i18n "docs" }}</a>
+          {{ if .Parent }} • <a href="{{ .Parent.RelPermalink }}">{{ .Parent.Title }}</a>{{ end }}
+          • {{ .Title }}
+        </p>
+      {{ end }}
+      <h1>{{ .Title }}</h1>
+      {{ if .Site.Params.docs.showToc }}
+        {{ .TableOfContents }}
+      {{ end }}
+      <div>{{ .Content }}</div>
+    </article>
+  </section>
+{{ end }}

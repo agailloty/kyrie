@@ -1,0 +1,67 @@
+{{ define "main" }}
+  {{ $layout := or .Params.listLayout .Site.Params.blog.listLayout "cards" }}
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+  </header>
+
+  {{ if eq $layout "list" }}
+  {{/* ── List layout ─────────────────────────────── */}}
+  <ol class="article-list">
+    {{ range .Paginator.Pages }}
+    <li class="article-list-item">
+      <a href="{{ .RelPermalink }}" class="article-list-link">
+        {{ with .Params.image }}
+          <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" class="article-list-thumb">
+        {{ else }}
+          <div class="article-list-thumb article-list-thumb--placeholder"></div>
+        {{ end }}
+        <div class="article-list-body">
+          <span class="article-list-title">{{ .Title }}</span>
+          <span class="article-list-meta">{{ .Date.Format (or .Site.Params.dateFormat "02 Jan 2006") }} · {{ .ReadingTime }} min</span>
+        </div>
+      </a>
+    </li>
+    {{ end }}
+  </ol>
+
+  {{ else }}
+  {{/* ── Cards layout (default) ──────────────────── */}}
+  <div class="showcase showcase-articles">
+    {{ range .Paginator.Pages }}
+      <article class="showcase-card article-card">
+        {{ with .Params.image }}
+          <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" class="showcase-img">
+        {{ else }}
+          <div class="showcase-placeholder article-placeholder"></div>
+        {{ end }}
+        <div class="showcase-body">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          {{ $excerpt := .Summary | plainify | truncate 120 }}
+          {{ with $excerpt }}<p class="article-excerpt">{{ . }}</p>{{ end }}
+          {{ with .Params.tags }}
+            <div class="showcase-cats">
+              {{ range first 3 . }}<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>{{ end }}
+            </div>
+          {{ end }}
+          <div class="article-author">
+            {{ $authorImg := .Params.authorImage }}
+            {{ $author := .Params.author | default "Anonyme" }}
+            {{ if $authorImg }}
+              <img src="{{ $authorImg }}" alt="{{ $author }}" class="author-avatar">
+            {{ else }}
+              <div class="author-avatar-placeholder">{{ substr $author 0 1 | upper }}</div>
+            {{ end }}
+            <div class="author-info">
+              <span class="author-name">{{ $author }}</span>
+              <span class="author-meta">{{ .Date.Format (or .Site.Params.dateFormat "02 Jan 2006") }} • {{ .ReadingTime }} min</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ template "_internal/pagination.html" . }}
+{{ end }}

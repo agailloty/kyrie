@@ -1,0 +1,10 @@
+<footer class="site-footer">
+  <div class="wrap">
+    {{ if .Site.Params.footer.customText }}
+      <div>{{ .Site.Params.footer.customText }}</div>
+    {{ end }}
+    {{ if .Site.Params.footer.showCopyright }}
+      <div>&copy; {{ now.Year }} {{ or .Site.Params.brand.name .Site.Title }}</div>
+    {{ end }}
+  </div>
+</footer>

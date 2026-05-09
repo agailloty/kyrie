@@ -1,0 +1,11 @@
+{{ $s := .section }}
+<section class="home-section home-section--custom">
+  {{ with $s.title }}<h2>{{ . }}</h2>{{ end }}
+  {{ with $s.body }}<p>{{ . }}</p>{{ end }}
+  {{ with $s.image }}
+    <img src="{{ . }}" alt="{{ $s.title }}" loading="lazy" class="section-img">
+  {{ end }}
+  {{ with $s.cta }}
+    <a class="btn-primary" href="{{ or $s.ctaUrl "#" }}">{{ . }}</a>
+  {{ end }}
+</section>

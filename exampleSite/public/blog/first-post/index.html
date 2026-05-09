@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome to kyrie | My Curious Site</title>
+  <meta name="description" content="A quick introduction to the kyrie theme for Hugo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/main.min.c397838059057ba811b8d588999361d716b5581d274b4b1a44e60b5efdd6b6ca.css" integrity="sha256-w5eDgFkFe6gRuNWImZNh1xa1WB0nS0saROYLXv3Wtso=">
+  
+  <script>
+    (function() {
+      var mode = 'auto';
+      var stored = localStorage.getItem('colorMode');
+      if (stored) mode = stored;
+      if (mode === 'auto') {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark');
+        }
+      } else if (mode === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+</head><body class="size-m theme-teal" data-color-mode="auto">
+  <header class="site-header">
+  <div class="wrap nav-row">
+    <a class="brand" href="/">Curious</a>
+    
+    <nav class="nav-links" aria-label="main navigation">
+      
+      
+        <a href="/blog/">Blog</a>
+      
+        <a href="/projects/">Projects</a>
+      
+        <a href="/docs/">Docs</a>
+      
+        <a href="/about/">About</a>
+      
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      
+
+    </div>
+
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  
+  <div class="nav-mobile" id="mobile-nav">
+    <nav class="nav-links-mobile" aria-label="mobile navigation">
+      
+        <a href="/blog/">Blog</a>
+      
+        <a href="/projects/">Projects</a>
+      
+        <a href="/docs/">Docs</a>
+      
+        <a href="/about/">About</a>
+      
+    </nav>
+    <div class="nav-actions-mobile">
+      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      
+
+    </div>
+  </div>
+</header>
+<script>
+  (function () {
+    var btn = document.querySelector('.nav-toggle');
+    var panel = document.getElementById('mobile-nav');
+    if (!btn || !panel) return;
+    btn.addEventListener('click', function () {
+      var open = panel.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.classList.toggle('is-open', open);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        panel.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.classList.remove('is-open');
+      }
+    });
+  })();
+
+  
+  (function () {
+    var toggles = document.querySelectorAll('.theme-toggle');
+    if (!toggles.length) return;
+    
+    function isDark() {
+      return document.documentElement.classList.contains('dark');
+    }
+    
+    function setTheme(dark) {
+      if (dark) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+        localStorage.setItem('colorMode', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        localStorage.setItem('colorMode', 'light');
+      }
+    }
+    
+    toggles.forEach(function(toggle) {
+      toggle.addEventListener('click', function () {
+        setTheme(!isDark());
+      });
+    });
+  })();
+</script>
+
+  <main class="main-content wrap">
+    
+  <div class="reading-progress-bar" id="reading-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="article-shell">
+    <article class="single">
+      <header>
+        <h1>Welcome to kyrie</h1>
+        <div class="post-meta">
+  
+  
+  
+  
+
+  <div class="post-meta-row">
+    
+    <span class="post-meta-item">
+      <svg class="post-meta-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <rect x="1" y="3" width="14" height="12" rx="2"/>
+        <path d="M1 7h14M5 1v4M11 1v4"/>
+      </svg>
+      <time datetime="2024-06-01">01 Jun 2024</time>
+    </span>
+    
+
+    
+    <span class="post-meta-sep" aria-hidden="true">·</span>
+    <span class="post-meta-item">
+      <svg class="post-meta-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="8" cy="5" r="3"/>
+        <path d="M2 14c0-3.314 2.686-6 6-6s6 2.686 6 6"/>
+      </svg>
+      <span>Your Name</span>
+    </span>
+    
+
+    
+    <span class="post-meta-sep" aria-hidden="true">·</span>
+    <span class="post-meta-item">
+      <svg class="post-meta-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="8" cy="8" r="6.5"/>
+        <path d="M8 4.5V8l2.5 2.5"/>
+      </svg>
+      <span>1 min</span>
+    </span>
+    
+  </div>
+
+  
+    
+    <div class="post-meta-tags">
+      <a href="/tags/hugo/" class="tag">hugo</a><a href="/tags/theme/" class="tag">theme</a>
+    </div>
+    
+  
+</div>
+
+      </header>
+      <div class="content">
+        <p>This is your first blog post. Edit or delete it and start writing your own content.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>kyrie supports <strong>Markdown</strong>, raw HTML, and all standard Hugo features.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Bilingual (multilingual-ready)</li>
+<li>Blog, Docs, and Projects sections</li>
+<li>Light / Dark / Auto color mode</li>
+<li>7 color schemes</li>
+<li>Responsive layout</li>
+</ul>
+
+      </div>
+      
+        <footer class="post-footer">
+          <div class="post-tags">
+            <span class="post-tags-label">Tags :</span>
+            <a href="/tags/hugo/" class="tag">hugo</a><a href="/tags/theme/" class="tag">theme</a>
+          </div>
+        </footer>
+      
+    </article>
+
+    
+    
+    <aside class="article-toc" aria-label="Table des matières">
+      <div class="toc-inner">
+        <p class="toc-label">Table des matières</p>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#features">Features</a></li>
+  </ul>
+</nav>
+      </div>
+    </aside>
+    
+  </div>
+
+  <script>
+    (function () {
+      var bar = document.getElementById('reading-progress');
+      if (!bar) return;
+      function updateProgress() {
+        var docEl = document.documentElement;
+        var scrollTop = docEl.scrollTop || document.body.scrollTop;
+        var scrollHeight = docEl.scrollHeight - docEl.clientHeight;
+        var progress = scrollHeight > 0 ? Math.round((scrollTop / scrollHeight) * 100) : 0;
+        bar.style.width = progress + '%';
+        bar.setAttribute('aria-valuenow', progress);
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+       
+      var tocLinks = document.querySelectorAll('.article-toc a');
+      if (!tocLinks.length) return;
+      var headings = Array.from(document.querySelectorAll('.single .content h2, .single .content h3'));
+      function onScroll() {
+        var scrollY = window.scrollY + 100;
+        var current = headings.filter(function(h) { return h.offsetTop <= scrollY; }).pop();
+        tocLinks.forEach(function(a) { a.classList.remove('toc-active'); });
+        if (current) {
+          var active = document.querySelector('.article-toc a[href="#' + current.id + '"]');
+          if (active) active.classList.add('toc-active');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+
+  </main>
+  <footer class="site-footer">
+  <div class="wrap">
+    
+    
+      <div>&copy; 2026 Curious</div>
+    
+  </div>
+</footer>
+
+  <script>
+    (function () {
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('pre').forEach(function (pre) {
+          var code = pre.innerText || pre.textContent;
+          
+          
+          var wrapper = document.createElement('div');
+          wrapper.className = 'highlight-wrapper';
+          pre.parentNode.insertBefore(wrapper, pre);
+          wrapper.appendChild(pre);
+          
+          
+          var btn = document.createElement('button');
+          btn.className = 'copy-code-btn';
+          btn.type = 'button';
+          btn.textContent = 'Copier';
+          btn.setAttribute('aria-label', 'Copier le code');
+          wrapper.appendChild(btn);
+          
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            navigator.clipboard.writeText(code).then(function () {
+              btn.textContent = 'Copié!';
+              btn.classList.add('copied');
+              setTimeout(function () {
+                btn.textContent = 'Copier';
+                btn.classList.remove('copied');
+              }, 2000);
+            }).catch(function () {
+              btn.textContent = 'Erreur';
+            });
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+name = "Kyrie"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "Customizable multilingual Hugo theme for blog, pages, and documentation"
+homepage = "https://github.com/agailloty/kyrie"
+demosite = "https://agailloty.github.io/kyrie"
+tags = ["blog", "docs", "projects", "multilingual", "responsive", "dark-mode", "color-scheme"]
+features = ["blog", "documentation", "projects", "multilingual", "theme-params", "dark-mode", "i18n"]
+min_version = "0.112.0"
+
+[author]
+name = "agailloty"
+homepage = "https://github.com/agailloty"

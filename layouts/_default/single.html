@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <article class="single">
+    <header>
+      <h1>{{ .Title }}</h1>
+      {{ partial "post-meta.html" . }}
+    </header>
+    {{ if and .Params.toc .Site.Params.docs.showToc }}
+      {{ .TableOfContents }}
+    {{ end }}
+    <div>
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}

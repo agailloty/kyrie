@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <header class="taxonomy-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Data.Terms }}
+      <p class="taxonomy-count">{{ len . }} {{ $.Data.Plural }}</p>
+    {{ end }}
+  </header>
+  
+  <div class="tag-cloud">
+    {{ with .Data.Terms }}
+      {{ range .ByCount }}
+        <a href="{{ .Page.RelPermalink }}" class="tag-cloud-item" data-count="{{ .Count }}">
+          <span class="tag-name">{{ .Page.Title }}</span>
+          <span class="tag-count">{{ .Count }}</span>
+        </a>
+      {{ end }}
+    {{ else }}
+      <p>{{ i18n "noItems" | default "Aucun élément." }}</p>
+    {{ end }}
+  </div>
+{{ end }}

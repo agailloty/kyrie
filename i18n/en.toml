@@ -1,0 +1,26 @@
+[latestPosts]
+other = "Latest posts"
+
+[quickAccess]
+other = "Quick access"
+
+[blog]
+other = "Blog"
+
+[docs]
+other = "Documentation"
+
+[pages]
+other = "Pages"
+
+[blogDescription]
+other = "Publish articles and updates"
+
+[docsDescription]
+other = "Structure your knowledge base"
+
+[pagesDescription]
+other = "Create marketing and company pages"
+
+[documentation]
+other = "Docs navigation"

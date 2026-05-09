@@ -1,0 +1,65 @@
+{{ define "main" }}
+  <div class="reading-progress-bar" id="reading-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="article-shell">
+    <article class="single">
+      <header>
+        <h1>{{ .Title }}</h1>
+        {{ partial "post-meta.html" . }}
+      </header>
+      <div class="content">
+        {{ .Content }}
+      </div>
+      {{ with .Params.tags }}
+        <footer class="post-footer">
+          <div class="post-tags">
+            <span class="post-tags-label">Tags :</span>
+            {{ range . }}<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>{{ end }}
+          </div>
+        </footer>
+      {{ end }}
+    </article>
+
+    {{ $toc := .TableOfContents }}
+    {{ if and $toc (ne $toc "<nav id=\"TableOfContents\"></nav>") }}
+    <aside class="article-toc" aria-label="Table des matières">
+      <div class="toc-inner">
+        <p class="toc-label">Table des matières</p>
+        {{ $toc }}
+      </div>
+    </aside>
+    {{ end }}
+  </div>
+
+  <script>
+    (function () {
+      var bar = document.getElementById('reading-progress');
+      if (!bar) return;
+      function updateProgress() {
+        var docEl = document.documentElement;
+        var scrollTop = docEl.scrollTop || document.body.scrollTop;
+        var scrollHeight = docEl.scrollHeight - docEl.clientHeight;
+        var progress = scrollHeight > 0 ? Math.round((scrollTop / scrollHeight) * 100) : 0;
+        bar.style.width = progress + '%';
+        bar.setAttribute('aria-valuenow', progress);
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      /* Highlight active TOC link on scroll */
+      var tocLinks = document.querySelectorAll('.article-toc a');
+      if (!tocLinks.length) return;
+      var headings = Array.from(document.querySelectorAll('.single .content h2, .single .content h3'));
+      function onScroll() {
+        var scrollY = window.scrollY + 100;
+        var current = headings.filter(function(h) { return h.offsetTop <= scrollY; }).pop();
+        tocLinks.forEach(function(a) { a.classList.remove('toc-active'); });
+        if (current) {
+          var active = document.querySelector('.article-toc a[href="#' + current.id + '"]');
+          if (active) active.classList.add('toc-active');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+{{ end }}

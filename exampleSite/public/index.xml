@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on My Curious Site</title>
+    <link>//localhost:1313/</link>
+    <description>Recent content in Home on My Curious Site</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 01 Jun 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Example Project</title>
+      <link>//localhost:1313/projects/example-project/</link>
+      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/projects/example-project/</guid>
+      <description>&lt;p&gt;Describe your project here. You can use full Markdown.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Getting Started</title>
+      <link>//localhost:1313/docs/getting-started/</link>
+      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/docs/getting-started/</guid>
+      <description>&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;&#xA;&lt;p&gt;See the theme README for full installation instructions.&lt;/p&gt;&#xA;&lt;h2 id=&#34;configuration&#34;&gt;Configuration&lt;/h2&gt;&#xA;&lt;p&gt;Edit &lt;code&gt;hugo.toml&lt;/code&gt; to configure colors, layout, and content sections.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Welcome to kyrie</title>
+      <link>//localhost:1313/blog/first-post/</link>
+      <pubDate>Sat, 01 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/blog/first-post/</guid>
+      <description>&lt;p&gt;This is your first blog post. Edit or delete it and start writing your own content.&lt;/p&gt;&#xA;&lt;h2 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h2&gt;&#xA;&lt;p&gt;kyrie supports &lt;strong&gt;Markdown&lt;/strong&gt;, raw HTML, and all standard Hugo features.&lt;/p&gt;&#xA;&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Bilingual (multilingual-ready)&lt;/li&gt;&#xA;&lt;li&gt;Blog, Docs, and Projects sections&lt;/li&gt;&#xA;&lt;li&gt;Light / Dark / Auto color mode&lt;/li&gt;&#xA;&lt;li&gt;7 color schemes&lt;/li&gt;&#xA;&lt;li&gt;Responsive layout&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>About</title>
+      <link>//localhost:1313/about/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/about/</guid>
+      <description>&lt;p&gt;This is the about page. Tell visitors who you are and what your site is about.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

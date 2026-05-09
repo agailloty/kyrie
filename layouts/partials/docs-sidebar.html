@@ -1,0 +1,10 @@
+<aside class="sidebar" aria-label="documentation navigation">
+  <strong>{{ i18n "documentation" }}</strong>
+  {{ with .Site.GetPage "section" "docs" }}
+    <ul>
+      {{ range .Pages.ByWeight }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+  {{ end }}
+</aside>

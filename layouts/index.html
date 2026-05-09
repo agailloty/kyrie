@@ -1,0 +1,12 @@
+{{ define "main" }}
+  {{ if .Site.Params.home.showHero }}
+    <section class="hero">
+      <h1>{{ or .Site.Params.home.heroTitle .Site.Title }}</h1>
+      <p>{{ or .Site.Params.home.heroSubtitle .Site.Params.tagline }}</p>
+    </section>
+  {{ end }}
+
+  {{ range .Site.Params.home.sections }}
+    {{ partial (printf "home/section-%s.html" .type) (dict "page" $ "section" .) }}
+  {{ end }}
+{{ end }}

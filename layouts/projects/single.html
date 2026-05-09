@@ -1,0 +1,23 @@
+{{ define "main" }}
+  <article class="single">
+    <header>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.categories }}
+        <div class="showcase-cats">
+          {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+        </div>
+      {{ end }}
+      {{ partial "post-meta.html" . }}
+    </header>
+
+    {{ with .Params.image }}
+      <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" class="project-hero-img">
+    {{ end }}
+
+    {{ with .Params.link }}
+      <p><a class="btn-primary" href="{{ . }}" target="_blank" rel="noopener noreferrer">Voir le projet →</a></p>
+    {{ end }}
+
+    <div>{{ .Content }}</div>
+  </article>
+{{ end }}
