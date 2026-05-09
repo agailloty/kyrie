@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    COLOR SCHEMES - Each theme defines light and dark mode colors
    To add a new scheme: create .theme-{name} and corresponding dark selectors
-   Available themes: teal (default), ocean, forest, sunset, lavender, slate, rose
+   Available themes: teal (default), ocean, forest, sunset, lavender, slate, rose, navy
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ─── Theme: Teal (Default) - Light ─────────────── */
@@ -362,6 +362,57 @@ html.dark .theme-rose {
     --hero-grad-2: #9f1239;
     --code-bg: #0f0709;
     --code-text: #fecdd3;
+  }
+}
+
+/* ─── Theme: Navy - Light ──────────────────────── */
+.theme-navy {
+  --bg: #ffffff;
+  --bg-accent: #f0f2f5;
+  --panel: #f8f9fb;
+  --text: #0d1117;
+  --muted: #57606a;
+  --primary: #1a3a6b;
+  --primary-strong: #0f2347;
+  --line: #d0d7de;
+  --hero-grad-1: #ffffff;
+  --hero-grad-2: #f0f2f5;
+  --code-bg: #0d1117;
+  --code-text: #e6edf3;
+}
+
+/* ─── Theme: Navy - Dark ───────────────────────── */
+.theme-navy.dark,
+.dark .theme-navy,
+html.dark .theme-navy {
+  --bg: #0d1117;
+  --bg-accent: #161b22;
+  --panel: #1c2230;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --primary: #4d7cc7;
+  --primary-strong: #79a1e0;
+  --line: #30363d;
+  --hero-grad-1: #0d1117;
+  --hero-grad-2: #161b22;
+  --code-bg: #010409;
+  --code-text: #e6edf3;
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme-navy:not(.light) {
+    --bg: #0d1117;
+    --bg-accent: #161b22;
+    --panel: #1c2230;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --primary: #4d7cc7;
+    --primary-strong: #79a1e0;
+    --line: #30363d;
+    --hero-grad-1: #0d1117;
+    --hero-grad-2: #161b22;
+    --code-bg: #010409;
+    --code-text: #e6edf3;
   }
 }
 
