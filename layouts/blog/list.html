@@ -1,5 +1,6 @@
 {{ define "main" }}
   {{ $layout := or .Params.listLayout .Site.Params.blog.listLayout "cards" }}
+  {{ $paginator := .Paginate (.Pages.ByDate.Reverse) }}
   <header>
     <h1>{{ .Title }}</h1>
     {{ with .Description }}<p>{{ . }}</p>{{ end }}
@@ -8,7 +9,7 @@
   {{ if eq $layout "list" }}
   {{/* ── List layout ─────────────────────────────── */}}
   <ol class="article-list">
-    {{ range .Paginator.Pages }}
+    {{ range $paginator.Pages }}
     <li class="article-list-item">
       <a href="{{ .RelPermalink }}" class="article-list-link">
         {{ with .Params.image }}
@@ -28,7 +29,7 @@
   {{ else }}
   {{/* ── Cards layout (default) ──────────────────── */}}
   <div class="showcase showcase-articles">
-    {{ range .Paginator.Pages }}
+    {{ range $paginator.Pages }}
       <article class="showcase-card article-card">
         {{ with .Params.image }}
           <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" class="showcase-img">
@@ -63,5 +64,5 @@
   </div>
   {{ end }}
 
-  {{ partial "pagination.html" . }}
+  {{ partial "pagination.html" $paginator }}
 {{ end }}
