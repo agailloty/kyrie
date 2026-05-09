@@ -1990,6 +1990,13 @@ code {
   padding-left: 0.3rem;
 }
 
+.article-toc nav a code {
+  font-size: inherit;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
 /*  Post meta */
 
 .post-meta {
