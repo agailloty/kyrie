@@ -1,5 +1,5 @@
 baseURL = "/"
-title = "My Curious Site"
+title = "My kyrie Site"
 theme = "kyrie"
 
 # ─── Multilingual setup ─────────────────────────────────────────────────────
@@ -29,8 +29,8 @@ colorMode = "auto"
 
 # ─── Brand ──────────────────────────────────────────────────────────────────
 [params.brand]
-name    = "Curious"
-logoText = "Curious"
+name    = "kyrie"
+logoText = "kyrie"
 
 # ─── Home page ──────────────────────────────────────────────────────────────
 [params.home]
