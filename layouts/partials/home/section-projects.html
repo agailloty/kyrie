@@ -1,12 +1,12 @@
 {{ $s := .section }}
 {{ $page := .page }}
 {{ $projects := where $page.Site.RegularPages "Section" "projects" }}
+{{ $layout := $s.layout | default "cards" }}
 {{ if gt (len $projects) 0 }}
 <section class="home-section">
   {{ with $s.title }}<h2>{{ . }}</h2>{{ end }}
 
   {{ if $s.showFilter }}
-    {{/* Collect unique categories across all projects */}}
     {{ $allCats := slice }}
     {{ range $projects }}
       {{ range .Params.categories }}
@@ -24,31 +24,69 @@
     {{ end }}
   {{ end }}
 
-  <div class="showcase" data-showcase>
-    {{ range $projects }}
+  <div class="showcase showcase--{{ $layout }}" data-showcase>
+    {{ range $i, $p := $projects }}
       {{ $catSlugs := slice }}
-      {{ range .Params.categories }}
+      {{ range $p.Params.categories }}
         {{ $catSlugs = $catSlugs | append (. | urlize) }}
       {{ end }}
-      <article class="showcase-card" data-cats="{{ delimit $catSlugs " " }}">
-        {{ with .Params.image }}
-          <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" class="showcase-img">
-        {{ else }}
-          <div class="showcase-placeholder"></div>
+      {{ $imgSrc := "" }}
+      {{ with $p.Params.image }}{{ $imgSrc = . }}{{ else }}{{ range $p.Resources.ByType "image" }}{{ if findRE `^featured` .Name }}{{ $imgSrc = .RelPermalink }}{{ end }}{{ end }}{{ end }}
+      {{ $imgCredit    := $p.Params.imageCredit | default "" }}
+      {{ $imgCreditUrl := $p.Params.imageCreditUrl | default "" }}
+      <article class="showcase-card{{ if eq $i 0 }} showcase-card--featured{{ end }}" data-cats="{{ delimit $catSlugs " " }}">
+
+        {{/* ── Image block (hidden in shelf layout) ───────────────── */}}
+        {{ if ne $layout "shelf" }}
+        <div class="showcase-img-wrap">
+          {{ if $imgSrc }}
+            <img src="{{ $imgSrc }}" alt="{{ $p.Title }}" loading="lazy" class="showcase-img">
+            {{ if $imgCredit }}
+            <span class="img-credit">
+              {{ if $imgCreditUrl }}<a href="{{ $imgCreditUrl }}" target="_blank" rel="noopener noreferrer">{{ $imgCredit }}</a>{{ else }}{{ $imgCredit }}{{ end }}
+            </span>
+            {{ end }}
+          {{ else }}
+            <div class="showcase-placeholder"></div>
+          {{ end }}
+        </div>
         {{ end }}
+
+        {{/* ── Initials badge (shelf layout only) ─────────────────── */}}
+        {{ if eq $layout "shelf" }}
+        <div class="shelf-icon">{{ substr $p.Title 0 1 | upper }}</div>
+        {{ end }}
+
         <div class="showcase-body">
-          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-          {{ with .Description }}<p>{{ . }}</p>{{ end }}
-          {{ with .Params.categories }}
+          {{ if or $p.Params.status $p.Params.version }}
+          <div class="project-card-meta">
+            {{ with $p.Params.status }}<span class="project-status-dot project-status-dot--{{ . }}"></span><span class="project-card-status">{{ . | title }}</span>{{ end }}
+            {{ with $p.Params.version }}<span class="project-card-version">{{ . }}</span>{{ end }}
+          </div>
+          {{ end }}
+          <h3><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+          {{ with $p.Description }}<p>{{ . }}</p>{{ end }}
+
+          {{/* shelf shows tech pills; other layouts show categories */}}
+          {{ if eq $layout "shelf" }}
+            {{ with $p.Params.tech }}
             <div class="showcase-cats">
               {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
             </div>
+            {{ end }}
+          {{ else }}
+            {{ with $p.Params.categories }}
+            <div class="showcase-cats">
+              {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+            </div>
+            {{ end }}
           {{ end }}
+
           <div class="showcase-actions">
-            {{ with .Params.link }}
+            {{ with $p.Params.link }}
               <a class="btn-outline" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ i18n "viewProject" | default "Voir →" }}</a>
             {{ end }}
-            <a class="btn-outline" href="{{ .RelPermalink }}">{{ i18n "viewDetails" | default "Détails" }}</a>
+            <a class="btn-outline" href="{{ $p.RelPermalink }}">{{ i18n "viewDetails" | default "Détails" }}</a>
           </div>
         </div>
       </article>

@@ -75,3 +75,12 @@ other = "Page suivante"
 
 [pagination]
 other = "Pagination"
+
+[projectFeatures]
+other = "Fonctionnalités"
+
+[projectIssues]
+other = "Issues ouvertes"
+
+[projectUpdated]
+other = "Dernier push"

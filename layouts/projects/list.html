@@ -28,13 +28,30 @@
       {{ range .Params.categories }}
         {{ $catSlugs = $catSlugs | append (. | urlize) }}
       {{ end }}
+      {{ $imgSrc := "" }}
+      {{ with .Params.image }}{{ $imgSrc = . }}{{ else }}{{ range .Resources.ByType "image" }}{{ if findRE `^featured` .Name }}{{ $imgSrc = .RelPermalink }}{{ end }}{{ end }}{{ end }}
+      {{ $imgCredit    := .Params.imageCredit | default "" }}
+      {{ $imgCreditUrl := .Params.imageCreditUrl | default "" }}
       <article class="showcase-card" data-cats="{{ delimit $catSlugs " " }}">
-        {{ with .Params.image }}
-          <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" class="showcase-img">
-        {{ else }}
-          <div class="showcase-placeholder"></div>
-        {{ end }}
+        <div class="showcase-img-wrap">
+          {{ if $imgSrc }}
+            <img src="{{ $imgSrc }}" alt="{{ .Title }}" loading="lazy" class="showcase-img">
+            {{ if $imgCredit }}
+            <span class="img-credit">
+              {{ if $imgCreditUrl }}<a href="{{ $imgCreditUrl }}" target="_blank" rel="noopener noreferrer">{{ $imgCredit }}</a>{{ else }}{{ $imgCredit }}{{ end }}
+            </span>
+            {{ end }}
+          {{ else }}
+            <div class="showcase-placeholder"></div>
+          {{ end }}
+        </div>
         <div class="showcase-body">
+          {{ if or .Params.status .Params.version }}
+          <div class="project-card-meta">
+            {{ with .Params.status }}<span class="project-status-dot project-status-dot--{{ . }}"></span><span class="project-card-status">{{ . | title }}</span>{{ end }}
+            {{ with .Params.version }}<span class="project-card-version">{{ . }}</span>{{ end }}
+          </div>
+          {{ end }}
           <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
           {{ with .Description }}<p>{{ . }}</p>{{ end }}
           {{ with .Params.categories }}
