@@ -1042,7 +1042,6 @@ code {
 .single .content {
   font-size: calc(var(--font-base) * 1.02);
   line-height: 1.8;
-  max-width: 74ch;
 }
 
 .single .content > p:first-of-type {
