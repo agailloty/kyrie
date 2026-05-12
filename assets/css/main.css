@@ -1354,29 +1354,32 @@ code {
 
 /* Hero banner */
 .profile-hero {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-bottom: var(--space-xl);
-  background: var(--panel);
-  border: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
-  box-shadow: 0 8px 40px color-mix(in srgb, var(--primary) 8%, transparent);
+  display: none; /* removed — replaced by .profile-header */
 }
 
 .profile-hero-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--primary) 0%, color-mix(in srgb, var(--primary) 40%, var(--bg-accent)) 60%, var(--bg-accent) 100%);
-  opacity: 0.12;
-  pointer-events: none;
+  display: none;
 }
 
 .profile-hero-inner {
-  position: relative;
+  display: none;
+}
+
+/* ── Profile header (avatar + identité + bio + réseaux fusionnés) ── */
+.profile-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-xl);
-  padding: calc(var(--space-xl) * 1.2) var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.profile-header-left {
+  flex-shrink: 0;
+}
+
+.profile-header-body {
+  flex: 1;
+  min-width: 0;
 }
 
 /* Avatar */
@@ -1387,12 +1390,12 @@ code {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .profile-avatar-link:hover {
-  transform: scale(1.04);
+  transform: scale(1.03);
   box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary) 25%, transparent);
 }
 .profile-avatar {
-  width: 140px;
-  height: 140px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid var(--primary);
@@ -1400,13 +1403,13 @@ code {
   box-shadow: 0 4px 20px color-mix(in srgb, var(--primary) 30%, transparent);
 }
 .profile-avatar-placeholder {
-  width: 140px;
-  height: 140px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
   background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 30%, transparent), color-mix(in srgb, var(--primary) 10%, transparent));
   border: 4px solid var(--primary);
   color: var(--primary);
-  font-size: 3.5rem;
+  font-size: 7rem;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -1483,13 +1486,10 @@ code {
 .profile-body {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: var(--space-lg);
 }
 .profile-section {
-  background: var(--panel);
-  border: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
-  border-radius: 14px;
-  padding: var(--space-lg);
+  /* flat — no border, no background, no border-radius */
 }
 .profile-section-title {
   font-size: 0.75rem;
@@ -1498,8 +1498,6 @@ code {
   letter-spacing: 0.1em;
   color: var(--primary);
   margin: 0 0 var(--space-md);
-  padding-bottom: 0.6rem;
-  border-bottom: 2px solid color-mix(in srgb, var(--primary) 20%, transparent);
 }
 
 /* Bio */
@@ -1507,7 +1505,7 @@ code {
   font-size: var(--font-md);
   color: var(--text);
   line-height: 1.75;
-  margin: 0;
+  margin: var(--space-sm) 0 var(--space-md);
 }
 
 /* Skills */
@@ -1526,7 +1524,16 @@ code {
   border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
 }
 
-/* Publications grid */
+/* Publications section */
+.profile-publications-section {
+  margin-top: var(--space-xl);
+}
+
+.profile-publications-section > .profile-section-title {
+  margin-bottom: var(--space-lg);
+}
+
+/* Legacy pub-card — kept for compat but no longer used */
 .profile-publications {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -1582,18 +1589,17 @@ code {
 
 /* Responsive */
 @media (max-width: 640px) {
-  .profile-hero-inner {
+  .profile-header {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: var(--space-lg);
     gap: var(--space-md);
   }
   .profile-avatar,
   .profile-avatar-placeholder {
-    width: 110px;
-    height: 110px;
-    font-size: 2.8rem;
+    width: 140px;
+    height: 140px;
+    font-size: 3.5rem;
   }
   .profile-socials {
     justify-content: center;
