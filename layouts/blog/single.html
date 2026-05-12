@@ -1,4 +1,9 @@
 {{ define "main" }}
+  {{/* Résolution de l'image mise en avant */}}
+  {{ $imgSrc := "" }}
+  {{ with .Params.image }}{{ $imgSrc = . }}{{ else }}{{ range .Resources.ByType "image" }}{{ if findRE `^featured` .Name }}{{ $imgSrc = .RelPermalink }}{{ end }}{{ end }}{{ end }}
+  {{ $imgCredit := .Params.imageCredit | default "" }}
+  {{ $imgCreditUrl := .Params.imageCreditUrl | default "" }}
   <div class="reading-progress-bar" id="reading-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
   <div class="article-shell">
     <article class="single">
@@ -6,6 +11,16 @@
         <h1>{{ .Title }}</h1>
         {{ partial "post-meta.html" . }}
       </header>
+      {{ if $imgSrc }}
+      <div class="featured-image-wrap">
+        <img src="{{ $imgSrc }}" alt="{{ .Title }}" class="featured-image" loading="eager">
+        {{ if $imgCredit }}
+        <p class="featured-image-credit">
+          {{ if $imgCreditUrl }}<a href="{{ $imgCreditUrl }}" target="_blank" rel="noopener noreferrer">{{ $imgCredit }}</a>{{ else }}{{ $imgCredit }}{{ end }}
+        </p>
+        {{ end }}
+      </div>
+      {{ end }}
       <div class="content">
         {{ .Content }}
       </div>

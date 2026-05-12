@@ -29,7 +29,7 @@ html.dark:root {
   --panel: #252525;
   --text: #e8e6e3;
   --muted: #a0998c;
-  --primary: #2dd4bf;
+  --primary: #5d8a54;
   --primary-strong: #5eead4;
   --line: #3d3d3d;
   --hero-grad-1: #1f2937;
@@ -2362,6 +2362,68 @@ body.size-xl .author-avatar-placeholder {
     color-mix(in srgb, var(--bg-accent) 80%, var(--primary)) 50%,
     var(--bg) 100%
   );
+}
+
+/* Featured image — card wrapper (cards layout) */
+.showcase-img-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.showcase-img-wrap .showcase-img {
+  border-radius: 0;
+}
+
+.img-credit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.85);
+  background: rgba(0,0,0,0.45);
+  border-radius: var(--radius-sm) 0 0 0;
+  line-height: 1.4;
+}
+
+.img-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Featured image — single article */
+.featured-image-wrap {
+  margin: var(--space-md) 0 var(--space-lg);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.featured-image {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+.featured-image-credit {
+  margin: 0.35rem 0 0;
+  font-size: var(--font-xs);
+  color: var(--muted);
+  text-align: right;
+}
+
+.featured-image-credit a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.featured-image-credit a:hover {
+  color: var(--primary);
 }
 
 /*  Article list layout */

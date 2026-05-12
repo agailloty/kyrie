@@ -10,16 +10,21 @@
   {{/* ── List layout ─────────────────────────────── */}}
   <ol class="article-list">
     {{ range $paginator.Pages }}
+    {{/* Résolution de l'image mise en avant */}}
+    {{ $imgSrc := "" }}
+    {{ with .Params.image }}{{ $imgSrc = . }}{{ else }}{{ range .Resources.ByType "image" }}{{ if findRE `^featured` .Name }}{{ $imgSrc = .RelPermalink }}{{ end }}{{ end }}{{ end }}
+    {{ $imgCredit := .Params.imageCredit | default "" }}
+    {{ $imgCreditUrl := .Params.imageCreditUrl | default "" }}
     <li class="article-list-item">
       <a href="{{ .RelPermalink }}" class="article-list-link">
-        {{ with .Params.image }}
-          <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" class="article-list-thumb">
+        {{ if $imgSrc }}
+          <img src="{{ $imgSrc }}" alt="{{ .Title }}" loading="lazy" class="article-list-thumb">
         {{ else }}
           <div class="article-list-thumb article-list-thumb--placeholder"></div>
         {{ end }}
         <div class="article-list-body">
           <span class="article-list-title">{{ .Title }}</span>
-          <span class="article-list-meta">{{ .Date.Format (or .Site.Params.dateFormat "02 Jan 2006") }} · {{ .ReadingTime }} min</span>
+          <span class="article-list-meta">{{ .Date.Format (or $.Site.Params.dateFormat "02 Jan 2006") }} · {{ .ReadingTime }} min</span>
         </div>
       </a>
     </li>
@@ -30,12 +35,24 @@
   {{/* ── Cards layout (default) ──────────────────── */}}
   <div class="showcase showcase-articles">
     {{ range $paginator.Pages }}
+      {{/* Résolution de l'image mise en avant */}}
+      {{ $imgSrc := "" }}
+      {{ with .Params.image }}{{ $imgSrc = . }}{{ else }}{{ range .Resources.ByType "image" }}{{ if findRE `^featured` .Name }}{{ $imgSrc = .RelPermalink }}{{ end }}{{ end }}{{ end }}
+      {{ $imgCredit := .Params.imageCredit | default "" }}
+      {{ $imgCreditUrl := .Params.imageCreditUrl | default "" }}
       <article class="showcase-card article-card">
-        {{ with .Params.image }}
-          <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" class="showcase-img">
-        {{ else }}
-          <div class="showcase-placeholder article-placeholder"></div>
-        {{ end }}
+        <div class="showcase-img-wrap">
+          {{ if $imgSrc }}
+            <img src="{{ $imgSrc }}" alt="{{ .Title }}" loading="lazy" class="showcase-img">
+            {{ if $imgCredit }}
+            <span class="img-credit">
+              {{ if $imgCreditUrl }}<a href="{{ $imgCreditUrl }}" target="_blank" rel="noopener noreferrer">{{ $imgCredit }}</a>{{ else }}{{ $imgCredit }}{{ end }}
+            </span>
+            {{ end }}
+          {{ else }}
+            <div class="showcase-placeholder article-placeholder"></div>
+          {{ end }}
+        </div>
         <div class="showcase-body">
           <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
           {{ $excerpt := .Summary | plainify | truncate 120 }}
@@ -54,9 +71,9 @@
               <div class="author-avatar-placeholder">{{ substr $author 0 1 | upper }}</div>
             {{ end }}
             <div class="author-info">
-              {{ $authorUrl := .Site.Params.author.url | default "/about/" }}
+              {{ $authorUrl := $.Site.Params.author.url | default "/about/" }}
               <a href="{{ $authorUrl | relLangURL }}" class="author-name post-meta-author">{{ $author }}</a>
-              <span class="author-meta">{{ .Date.Format (or .Site.Params.dateFormat "02 Jan 2006") }} • {{ .ReadingTime }} min</span>
+              <span class="author-meta">{{ .Date.Format (or $.Site.Params.dateFormat "02 Jan 2006") }} • {{ .ReadingTime }} min</span>
             </div>
           </div>
         </div>

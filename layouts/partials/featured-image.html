@@ -1,0 +1,30 @@
+{{/*
+  Resolves the featured image for a blog post.
+  Priority: 1) .Params.image (front matter)  2) featured.* in page bundle
+  Returns a dict: { src, alt, credit, creditUrl }
+  Usage: {{ partial "featured-image.html" . }}
+*/}}
+{{ $src := "" }}
+{{ $alt := .Title }}
+{{ $credit := .Params.imageCredit | default "" }}
+{{ $creditUrl := .Params.imageCreditUrl | default "" }}
+
+{{/* 1. Explicit front matter path */}}
+{{ with .Params.image }}
+  {{ $src = . }}
+{{ else }}
+  {{/* 2. Auto-detect featured.* in the page bundle */}}
+  {{ range .Resources.ByType "image" }}
+    {{ if findRE `^featured` .Name }}
+      {{ $src = .RelPermalink }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if $src }}
+  {{ $result := dict "src" $src "alt" $alt "credit" $credit "creditUrl" $creditUrl }}
+  {{ return $result }}
+{{ else }}
+  {{ $result := dict "src" "" "alt" $alt "credit" $credit "creditUrl" $creditUrl }}
+  {{ return $result }}
+{{ end }}
