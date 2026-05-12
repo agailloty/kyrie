@@ -4,8 +4,12 @@
     
     <nav class="nav-links" aria-label="main navigation">
       {{ $currentPage := . }}
+      {{ $docsEnabled := not (eq .Site.Params.docs.enabled false) }}
       {{ range .Site.Menus.main }}
-        <a href="{{ .URL | relLangURL }}"{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} class="is-active" aria-current="page"{{ end }}>{{ .Name }}</a>
+        {{ $isDocsLink := hasPrefix (.URL | strings.TrimLeft "/") "docs" }}
+        {{ if or $docsEnabled (not $isDocsLink) }}
+          <a href="{{ .URL | relLangURL }}"{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} class="is-active" aria-current="page"{{ end }}>{{ .Name }}</a>
+        {{ end }}
       {{ end }}
     </nav>
 
@@ -37,8 +41,12 @@
   <!-- Mobile menu -->
   <div class="nav-mobile" id="mobile-nav">
     <nav class="nav-links-mobile" aria-label="mobile navigation">
+      {{ $docsEnabled := not (eq .Site.Params.docs.enabled false) }}
       {{ range .Site.Menus.main }}
-        <a href="{{ .URL | relLangURL }}">{{ .Name }}</a>
+        {{ $isDocsLink := hasPrefix (.URL | strings.TrimLeft "/") "docs" }}
+        {{ if or $docsEnabled (not $isDocsLink) }}
+          <a href="{{ .URL | relLangURL }}">{{ .Name }}</a>
+        {{ end }}
       {{ end }}
     </nav>
     <div class="nav-actions-mobile">
