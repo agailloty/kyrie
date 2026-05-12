@@ -127,20 +127,7 @@
               {{ range first 3 . }}<a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>{{ end }}
             </div>
           {{ end }}
-          <div class="article-author">
-            {{ $authorImg  := .Params.authorImage }}
-            {{ $authorName := .Params.author | default "Anonyme" }}
-            {{ if $authorImg }}
-              <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-avatar">
-            {{ else }}
-              <div class="author-avatar-placeholder">{{ substr $authorName 0 1 | upper }}</div>
-            {{ end }}
-            <div class="author-info">
-              {{ $authorUrl := $.Site.Params.author.url | default "/about/" }}
-              <a href="{{ $authorUrl | relLangURL }}" class="author-name post-meta-author">{{ $authorName }}</a>
-              <span class="author-meta">{{ .Date.Format (or $.Site.Params.dateFormat "02 Jan 2006") }} • {{ .ReadingTime }} min</span>
-            </div>
-          </div>
+          <span class="author-meta">{{ .Date.Format (or $.Site.Params.dateFormat "02 Jan 2006") }} • {{ .ReadingTime }} min</span>
         </div>
       </article>
       {{ end }}
