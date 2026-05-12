@@ -9,12 +9,23 @@
 
   <div class="showcase showcase-articles">
     {{ range .Pages }}
+      {{ $imgSrc := "" }}
+      {{ with .Params.image }}{{ $imgSrc = . }}{{ else }}{{ range .Resources.ByType "image" }}{{ if findRE `^featured` .Name }}{{ $imgSrc = .RelPermalink }}{{ end }}{{ end }}{{ end }}
+      {{ $imgCredit := .Params.imageCredit | default "" }}
+      {{ $imgCreditUrl := .Params.imageCreditUrl | default "" }}
       <article class="showcase-card article-card">
-        {{ with .Params.image }}
-          <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" class="showcase-img">
-        {{ else }}
-          <div class="showcase-placeholder article-placeholder"></div>
-        {{ end }}
+        <div class="showcase-img-wrap">
+          {{ if $imgSrc }}
+            <img src="{{ $imgSrc }}" alt="{{ .Title }}" loading="lazy" class="showcase-img">
+            {{ if $imgCredit }}
+            <span class="img-credit">
+              {{ if $imgCreditUrl }}<a href="{{ $imgCreditUrl }}" target="_blank" rel="noopener noreferrer">{{ $imgCredit }}</a>{{ else }}{{ $imgCredit }}{{ end }}
+            </span>
+            {{ end }}
+          {{ else }}
+            <div class="showcase-placeholder article-placeholder"></div>
+          {{ end }}
+        </div>
         <div class="showcase-body">
           <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
           {{ $excerpt := .Summary | plainify | truncate 120 }}
