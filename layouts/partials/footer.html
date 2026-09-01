@@ -1,10 +1,11 @@
 <footer class="site-footer">
-  <div class="wrap">
-    {{ if .Site.Params.footer.customText }}
-      <div>{{ .Site.Params.footer.customText }}</div>
-    {{ end }}
-    {{ if .Site.Params.footer.showCopyright }}
-      <div>&copy; {{ now.Year }} {{ or .Site.Params.brand.name .Site.Title }}</div>
-    {{ end }}
+  <div class="wrap footer-grid">
+    <p class="footer-mark">{{ or .Site.Params.brand.logoText .Site.Title }}</p>
+    <p>{{ with .Site.Params.author.location }}{{ . }} · {{ end }}{{ now.Year }}</p>
+    <div class="footer-links">
+      {{ with .Site.Params.author.social.github }}<a href="{{ . }}" rel="me">GitHub ↗</a>{{ end }}
+      {{ with .Site.Params.author.social.linkedin }}<a href="{{ . }}" rel="me">LinkedIn ↗</a>{{ end }}
+      {{ with .Site.Params.author.social.email }}<a href="{{ . }}">Email ↗</a>{{ end }}
+    </div>
   </div>
 </footer>

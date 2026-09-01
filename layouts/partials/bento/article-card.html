@@ -1,0 +1,7 @@
+{{ $p := .page }}{{ $featured := .featured | default false }}
+<article class="article-card{{ if $featured }} article-card--featured{{ end }}">
+  <div class="eyebrow"><time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format (or $p.Site.Params.dateFormat "02 Jan 2006") }}</time><span>{{ $p.ReadingTime }} min</span></div>
+  <h2><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>{{ with $p.Description }}<p>{{ . }}</p>{{ end }}
+  {{ with $p.Params.tags }}<ul class="tag-list">{{ range first 3 . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+  <a class="text-link" href="{{ $p.RelPermalink }}">{{ i18n "readMore" | default "Read article" }} <span>↗</span></a>
+</article>

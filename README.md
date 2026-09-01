@@ -1,14 +1,14 @@
 # kyrie
 
-A clean, multilingual Hugo theme for **blog**, **documentation**, and **portfolio/projects** sites.
+A modular, multilingual Hugo theme for editorial developer portfolios, technical blogs, documentation, and project sites.
 
-- 7 color schemes with light / dark / auto mode
-- 3 interface sizes (m, l, xl)
+- Semantic neutral design tokens with light / dark / auto mode
+- Visible Bento grid primitives with intentional desktop, tablet, and mobile compositions
 - Bilingual out of the box (FR + EN i18n strings included)
-- Blog list in cards or list layout
+- Editorial blog index with a featured article
 - Sticky TOC sidebar on article pages
 - Reading progress bar
-- Project cards with category filter
+- Reusable featured-project, project-card, article-feature, and article-card partials
 - Docs section with sidebar navigation
 
 ---
