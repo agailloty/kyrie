@@ -1,119 +1,26 @@
+<a class="skip-link" href="#main-content">{{ i18n "skipToContent" | default "Skip to content" }}</a>
 <header class="site-header">
   <div class="wrap nav-row">
-    <a class="brand" href="{{ .Site.Home.RelPermalink }}">{{ or .Site.Params.brand.logoText .Site.Title }}</a>
-    
-    <nav class="nav-links" aria-label="main navigation">
-      {{ $currentPage := . }}
-      {{ $docsEnabled := not (eq .Site.Params.docs.enabled false) }}
-      {{ range .Site.Menus.main }}
-        {{ $isDocsLink := hasPrefix (.URL | strings.TrimLeft "/") "docs" }}
-        {{ if or $docsEnabled (not $isDocsLink) }}
-          <a href="{{ .URL | relLangURL }}"{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} class="is-active" aria-current="page"{{ end }}>{{ .Name }}</a>
-        {{ end }}
-      {{ end }}
+    <a class="brand" href="{{ .Site.Home.RelPermalink }}" aria-label="{{ .Site.Title }} — home">{{ or .Site.Params.brand.logoText .Site.Title }}</a>
+    <nav class="nav-links" aria-label="{{ i18n "mainNavigation" | default "Main navigation" }}">
+      {{ range .Site.Menus.main }}<a href="{{ .URL | relLangURL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>{{ end }}
     </nav>
-
     <div class="nav-actions">
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
-        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </button>
       {{ partial "language-switcher.html" . }}
-    </div>
-
-    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-
-  <!-- Mobile menu -->
-  <div class="nav-mobile" id="mobile-nav">
-    <nav class="nav-links-mobile" aria-label="mobile navigation">
-      {{ $docsEnabled := not (eq .Site.Params.docs.enabled false) }}
-      {{ range .Site.Menus.main }}
-        {{ $isDocsLink := hasPrefix (.URL | strings.TrimLeft "/") "docs" }}
-        {{ if or $docsEnabled (not $isDocsLink) }}
-          <a href="{{ .URL | relLangURL }}">{{ .Name }}</a>
-        {{ end }}
-      {{ end }}
-    </nav>
-    <div class="nav-actions-mobile">
-      <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle dark mode" title="Toggle dark/light mode">
-        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </button>
-      {{ partial "language-switcher.html" . }}
+      <button class="theme-toggle" type="button" aria-label="{{ i18n "toggleTheme" | default "Toggle color theme" }}"><span aria-hidden="true">◐</span></button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span><span class="sr-only">Menu</span></button>
     </div>
   </div>
+  <nav id="mobile-nav" class="nav-mobile" aria-label="{{ i18n "mobileNavigation" | default "Mobile navigation" }}">
+    {{ range .Site.Menus.main }}<a href="{{ .URL | relLangURL }}">{{ .Name }}</a>{{ end }}
+  </nav>
 </header>
 <script>
-  (function () {
-    var btn = document.querySelector('.nav-toggle');
-    var panel = document.getElementById('mobile-nav');
-    if (!btn || !panel) return;
-    btn.addEventListener('click', function () {
-      var open = panel.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded', String(open));
-      btn.classList.toggle('is-open', open);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        panel.classList.remove('is-open');
-        btn.setAttribute('aria-expanded', 'false');
-        btn.classList.remove('is-open');
-      }
-    });
-  })();
-
-  // Theme toggle (handles both desktop and mobile buttons)
-  (function () {
-    var toggles = document.querySelectorAll('.theme-toggle');
-    if (!toggles.length) return;
-    
-    function isDark() {
-      return document.documentElement.classList.contains('dark');
-    }
-    
-    function setTheme(dark) {
-      if (dark) {
-        document.documentElement.classList.add('dark');
-        document.documentElement.classList.remove('light');
-        localStorage.setItem('colorMode', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light');
-        localStorage.setItem('colorMode', 'light');
-      }
-    }
-    
-    toggles.forEach(function(toggle) {
-      toggle.addEventListener('click', function () {
-        setTheme(!isDark());
-      });
-    });
-  })();
+(() => {
+  const root = document.documentElement;
+  document.querySelector('.theme-toggle')?.addEventListener('click', () => { const dark = !root.classList.contains('dark'); root.classList.toggle('dark', dark); root.classList.toggle('light', !dark); localStorage.setItem('colorMode', dark ? 'dark' : 'light'); });
+  const button = document.querySelector('.nav-toggle'); const menu = document.querySelector('#mobile-nav');
+  button?.addEventListener('click', () => { const open = menu.classList.toggle('is-open'); button.setAttribute('aria-expanded', String(open)); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { menu?.classList.remove('is-open'); button?.setAttribute('aria-expanded', 'false'); } });
+})();
 </script>

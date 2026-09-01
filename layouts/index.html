@@ -1,12 +1,12 @@
 {{ define "main" }}
-  {{ if .Site.Params.home.showHero }}
-    <section class="hero">
-      <h1>{{ or .Site.Params.home.heroTitle .Site.Title }}</h1>
-      <p>{{ or .Site.Params.home.heroSubtitle .Site.Params.tagline }}</p>
-    </section>
-  {{ end }}
-
-  {{ range .Site.Params.home.sections }}
-    {{ partial (printf "home/section-%s.html" .type) (dict "page" $ "section" .) }}
-  {{ end }}
+{{ $projects := where .Site.RegularPages "Section" "projects" }}{{ $posts := (where .Site.RegularPages "Section" "blog").ByDate.Reverse }}
+<section class="bento bento--home" aria-labelledby="identity-title">
+  <div class="bento-cell identity-cell"><p class="eyebrow">{{ .Site.Params.author.location }} · Software engineering</p><h1 id="identity-title">{{ .Site.Params.author.name }}</h1><p class="identity-role">{{ .Site.Params.author.title }}</p><p class="identity-copy">{{ .Site.Params.author.bio }}</p><a class="text-link" href="{{ "about/" | relLangURL }}">{{ i18n "about" | default "About" }} <span>↗</span></a></div>
+  <div class="bento-cell monogram-cell" aria-label="gailloty visual identity"><span>g.</span><small>build / learn / share</small></div>
+  {{ with .Site.Params.author.skills }}<div class="bento-cell stack-cell"><p class="eyebrow">{{ i18n "toolkit" | default "Primary stack" }}</p><ul>{{ range first 6 . }}<li>{{ . }}</li>{{ end }}</ul></div>{{ end }}
+  <div class="bento-cell availability-cell"><span class="status-dot"></span><p>{{ i18n "openSourceNote" | default "Building robust software and sharing practical notes in the open." }}</p></div>
+</section>
+{{ if $projects }}<section class="home-section" aria-labelledby="selected-projects"><header class="section-header"><p class="section-index">01</p><h2 id="selected-projects">{{ i18n "selectedProjects" | default "Selected projects" }}</h2><a href="{{ "projects/" | relLangURL }}">{{ i18n "viewAll" | default "View all" }} ↗</a></header><div class="project-grid">{{ range $i, $p := first 3 $projects.ByWeight }}{{ partial "bento/project-card.html" (dict "page" $p "featured" (eq $i 0)) }}{{ end }}</div></section>{{ end }}
+{{ if $posts }}<section class="home-section" aria-labelledby="latest-writing"><header class="section-header"><p class="section-index">02</p><h2 id="latest-writing">{{ i18n "latestWriting" | default "Latest writing" }}</h2><a href="{{ "blog/" | relLangURL }}">{{ i18n "viewAll" | default "View all" }} ↗</a></header><div class="writing-grid">{{ range $i, $p := first 4 $posts }}{{ partial "bento/article-card.html" (dict "page" $p "featured" (eq $i 0)) }}{{ end }}</div></section>{{ end }}
+<section class="home-section contact-band" aria-labelledby="contact-title"><p class="section-index">03</p><div><p class="eyebrow">{{ i18n "contact" | default "Contact" }}</p><h2 id="contact-title">{{ i18n "buildTogether" | default "Let’s build something useful." }}</h2></div>{{ with .Site.Params.author.social.email }}<a href="{{ . }}">Email ↗</a>{{ end }}</section>
 {{ end }}
