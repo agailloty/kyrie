@@ -1,7 +1,7 @@
-{{ $p := .page }}{{ $featured := .featured | default false }}{{ $image := $p.Params.image | default "" }}
-{{ if not $image }}{{ with $p.Resources.GetMatch "featured*" }}{{ $image = .RelPermalink }}{{ end }}{{ end }}
+{{ $p := .page }}{{ $featured := .featured | default false }}
 <article class="project-card{{ if $featured }} project-card--featured{{ end }}">
-  {{ if $image }}<a class="project-visual" href="{{ $p.RelPermalink }}"><img src="{{ $image }}" alt="" loading="lazy"></a>{{ else }}<div class="project-visual project-visual--type" aria-hidden="true">{{ substr $p.Title 0 2 }}</div>{{ end }}
+  {{/* Visuel : monogramme d'initiales (la capture d'écran reste sur la page détail du projet) */}}
+  <div class="project-visual project-visual--type" aria-hidden="true">{{ substr $p.Title 0 2 }}</div>
   <div class="project-body">
     <div class="eyebrow"><span>{{ i18n "project" | default "Project" }}</span>{{ with $p.Params.status }}<span>{{ . }}</span>{{ end }}{{ with $p.Params.version }}<span>{{ . }}</span>{{ end }}</div>
     <h2><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h2>{{ with $p.Description }}<p>{{ . }}</p>{{ end }}
