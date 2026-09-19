@@ -1,0 +1,27 @@
+name: Cleanup tags
+
+on:
+  push:
+    paths: [".github/workflows/cleanup-tags.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  delete-tags:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Delete obsolete tags
+        run: |
+          for t in v0.4.0 v0.4.1 v0.4.2; do
+            if git ls-remote --tags origin "refs/tags/$t" | grep -q .; then
+              echo "Suppression du tag $t"
+              git push origin ":refs/tags/$t" || echo "échec suppression: $t"
+            else
+              echo "Tag $t absent, rien à faire"
+            fi
+          done
