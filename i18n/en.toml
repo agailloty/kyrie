@@ -84,3 +84,51 @@ other = "Open issues"
 
 [projectUpdated]
 other = "Last push"
+
+[articleSingular]
+other = "article"
+
+[articlePlural]
+other = "articles"
+
+[anonymousAuthor]
+other = "Anonymous"
+
+[contactTitle]
+other = "Get in touch"
+
+[contact]
+other = "Contact"
+
+[technicalNote]
+other = "Technical note"
+
+[technicalPublication]
+other = "Technical publication"
+
+[toolkit]
+other = "Primary stack"
+
+[openSourceNote]
+other = "Building robust software and sharing practical notes in the open."
+
+[selectedProjects]
+other = "Selected projects"
+
+[latestWriting]
+other = "Latest writing"
+
+[viewAll]
+other = "View all"
+
+[skipToContent]
+other = "Skip to content"
+
+[mainNavigation]
+other = "Main navigation"
+
+[mobileNavigation]
+other = "Mobile navigation"
+
+[toggleTheme]
+other = "Toggle color theme"

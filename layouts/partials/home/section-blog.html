@@ -42,7 +42,8 @@
           {{ if $imgSrc }}
             <img src="{{ $imgSrc }}" alt="{{ .Title }}" loading="lazy" class="showcase-img">
             {{ if $imgCredit }}
-            <span class="img-credit">
+          
+  <span class="img-credit">
               {{ if $imgCreditUrl }}<a href="{{ $imgCreditUrl }}" target="_blank" rel="noopener noreferrer">{{ $imgCredit }}</a>{{ else }}{{ $imgCredit }}{{ end }}
             </span>
             {{ end }}
@@ -61,7 +62,7 @@
           {{ end }}
           <div class="article-author">
             {{ $authorImg := .Params.authorImage }}
-            {{ $author := .Params.author | default "Anonyme" }}
+            {{ $author := .Params.author | default (i18n "anonymousAuthor") }}
             {{ if $authorImg }}
               <img src="{{ $authorImg }}" alt="{{ $author }}" class="author-avatar">
             {{ else }}

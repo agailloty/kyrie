@@ -4,7 +4,7 @@
   <header class="taxonomy-header">
     {{ with .Data.Singular }}<span class="taxonomy-label">{{ . | title }}</span>{{ end }}
     <h1>{{ .Title }}</h1>
-    <p class="taxonomy-count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}article{{ else }}articles{{ end }}</p>
+    <p class="taxonomy-count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}{{ i18n "articleSingular" }}{{ else }}{{ i18n "articlePlural" }}{{ end }}</p>
   </header>
 
   <div class="showcase showcase-articles">
@@ -37,7 +37,8 @@
           {{ end }}
           <div class="article-author">
             {{ $authorImg := .Params.authorImage }}
-            {{ $author := .Params.author | default "Anonyme" }}
+            {{ $author := .Params.au
+thor | default "Anonyme" }}
             {{ if $authorImg }}
               <img src="{{ $authorImg }}" alt="{{ $author }}" class="author-avatar">
             {{ else }}

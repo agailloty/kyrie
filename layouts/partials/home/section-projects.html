@@ -16,7 +16,7 @@
     {{ $allCats = $allCats | uniq | sort }}
     {{ if gt (len $allCats) 0 }}
     <div class="filter-bar" data-filter-bar>
-      <button class="filter-btn is-active" data-cat="*">{{ or $s.allLabel "Tous" }}</button>
+      <button class="filter-btn is-active" data-cat="*">{{ or $s.allLabel (i18n "allProjects") }}</button>
       {{ range $allCats }}
         <button class="filter-btn" data-cat="{{ . | urlize }}">{{ . }}</button>
       {{ end }}
@@ -43,7 +43,8 @@
             <img src="{{ $imgSrc }}" alt="{{ $p.Title }}" loading="lazy" class="showcase-img">
             {{ if $imgCredit }}
             <span class="img-credit">
-              {{ if $imgCreditUrl }}<a href="{{ $imgCreditUrl }}" target="_blank" rel="noopener noreferrer">{{ $imgCredit }}</a>{{ else }}{{ $imgCredit }}{{ end }}
+              {{ if $imgCreditUrl }}<a href="{{ $imgCreditUrl }}" target="_blank" rel="noopener noreferrer"
+>{{ $imgCredit }}</a>{{ else }}{{ $imgCredit }}{{ end }}
             </span>
             {{ end }}
           {{ else }}
@@ -95,7 +96,8 @@
 </section>
 
 <script>
-(function () {
+(function (
+) {
   document.querySelectorAll('[data-filter-bar]').forEach(function (bar) {
     var showcase = bar.nextElementSibling;
     if (!showcase) return;
